@@ -57,8 +57,11 @@ class OcrService:
         api_url = 'https://yhnf1pbln5.apigw.ntruss.com/custom/v1/29894/d66583da242cd4fcddc7c2c8b2e3a6a65692b0d9df8eb03bfea832e0a4d8f713/general'
         secret_key = NAVER_SECRET_KEY
 
+        input_format = image_content.split('.')[-1].lower()
+        if input_format not in ['jpg', 'jpeg', 'png', 'tif', 'tiff', 'pdf']:
+            raise ValueError(f"Unsupported file format: {input_format}, Supported formats are 'jpg', 'jpeg', 'png', 'tif', 'tiff', 'pdf'.")
         request_json = {
-            'images': [{'format': image_content.split('.')[-1], 'name': 'demo'}],
+            'images': [{'format': input_format, 'name': 'demo'}],
             'requestId': str(uuid.uuid4()),
             'version': 'V2',
             'timestamp': int(round(time.time() * 1000))
