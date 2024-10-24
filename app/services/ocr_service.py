@@ -58,7 +58,7 @@ class OcrService:
         secret_key = NAVER_SECRET_KEY
 
         request_json = {
-            'images': [{'format': 'jpg', 'name': 'demo'}],
+            'images': [{'format': image_content.split('.')[-1], 'name': 'demo'}],
             'requestId': str(uuid.uuid4()),
             'version': 'V2',
             'timestamp': int(round(time.time() * 1000))
